@@ -44,6 +44,7 @@ if w1:
     generated_image = generator(noise, training=False)
     i=generated_image[0, :, :, 0].numpy()
     #plt.imshow(np.array(generated_image[0, :, :, 0], dtype = float))
-    plt.imshow(i, cmap = 'magma', aspect='equal')
+    fig = plt.imshow(i, cmap = 'magma', aspect='equal')
     plt.show()
     st.image(i, clamp=True, use_column_width=True)
+    st.pyplot(fig=fig)
