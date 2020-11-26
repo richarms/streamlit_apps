@@ -19,12 +19,6 @@ import time
 
 from IPython import display
 
-checkpoint_dir = './training_checkpoints'
-checkpoint_prefix = os.path.join(checkpoint_dir, "ckpt")
-checkpoint = tf.train.Checkpoint()#optimizer=optimizer, model=model)
-
-status = checkpoint.restore(tf.train.latest_checkpoint(checkpoint_dir))
-
 
 import_path = './models/'
 generator = tf.keras.models.load_model(import_path + 'GGAN_generator.h5')
@@ -43,8 +37,7 @@ if w1:
     noise = tf.random.normal([1, 100])
     generated_image = generator(noise, training=False)
     i=generated_image[0, :, :, 0].numpy()
-    #plt.imshow(np.array(generated_image[0, :, :, 0], dtype = float))
     fig = plt.imshow(i, cmap = 'magma', aspect='equal')
     plt.show()
-    st.image(i, clamp=True, use_column_width=True)
     st.pyplot(fig=fig)
+    st.image(i, clamp=True, use_column_width=True)
